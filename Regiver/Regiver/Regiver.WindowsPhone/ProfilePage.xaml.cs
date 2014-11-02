@@ -1,4 +1,5 @@
 ﻿using Regiver.Common;
+using Regiver.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -67,6 +68,18 @@ namespace Regiver
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            var charity = (from item in DataModel.Current.Charities
+                                                where item.Id == DataModel.Current.SelectedCharityId
+                                                select item).FirstOrDefault();
+
+            if (charity == null)
+            {
+                charity = DataModel.Current.Charities.First();
+            }
+
+            this.DefaultViewModel["Charity"] = charity;
+
+            //this.DataContext = this.DefaultViewModel;
         }
 
         /// <summary>
@@ -107,5 +120,10 @@ namespace Regiver
         }
 
         #endregion
+
+        private void OnShowCharities(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(CharityListPage), DataModel.Current.SelectedCharityId);
+        }
     }
 }

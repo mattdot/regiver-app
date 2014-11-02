@@ -37,7 +37,7 @@
         		<TextBlock TextWrapping="Wrap" Text="Total Donated" Style="{StaticResource TitleTextBlockStyle}" Margin="0,20,0,0"/>
         		<TextBlock TextWrapping="Wrap" Text="$48.52" Style="{StaticResource SubheaderTextBlockStyle}"/>
         		<TextBlock TextWrapping="Wrap" Text="Favorite Cause" Style="{StaticResource TitleTextBlockStyle}" FontFamily="Global User Interface" Margin="0,40,0,0"/>
-        		<Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Global User Interface">
+        		<Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontFamily="Global User Interface" Click="OnShowCharities">
             		<Grid Margin="5" DataContext="{Binding DefaultViewModel.Charity, ElementName=page}">
             			<Grid.ColumnDefinitions>
             				<ColumnDefinition Width="Auto"/>

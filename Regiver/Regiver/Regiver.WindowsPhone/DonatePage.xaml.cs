@@ -75,9 +75,16 @@ namespace Regiver
                         select item).LastOrDefault();
 
             this.DefaultViewModel["Card"] = card;
-            this.DefaultViewModel["Charity"] = (from item in DataModel.Current.Charities
+            var charity = (from item in DataModel.Current.Charities
                                                 where item.Id == DataModel.Current.SelectedCharityId
                                                 select item).FirstOrDefault();
+
+            if (charity == null)
+            {
+                charity = DataModel.Current.Charities.First();
+            }
+
+            this.DefaultViewModel["Charity"] = charity;
 
             this.DataContext = this.DefaultViewModel;
         }
