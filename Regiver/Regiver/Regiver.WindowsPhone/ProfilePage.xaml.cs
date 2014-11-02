@@ -1,5 +1,4 @@
 ﻿using Regiver.Common;
-using Regiver.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,12 +23,12 @@ namespace Regiver
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DonatePage : Page
+    public sealed partial class ProfilePage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public DonatePage()
+        public ProfilePage()
         {
             this.InitializeComponent();
 
@@ -68,18 +67,6 @@ namespace Regiver
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var id = e.NavigationParameter.ToString();
-
-            var card = (from item in DataModel.Current.Cards
-                        where item.Id == id
-                        select item).LastOrDefault();
-
-            this.DefaultViewModel["Card"] = card;
-            this.DefaultViewModel["Charity"] = (from item in DataModel.Current.Charities
-                                                where item.Id == DataModel.Current.SelectedCharityId
-                                                select item).FirstOrDefault();
-
-            this.DataContext = this.DefaultViewModel;
         }
 
         /// <summary>
@@ -119,30 +106,6 @@ namespace Regiver
             this.navigationHelper.OnNavigatedFrom(e);
         }
 
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(CharityListPage), DataModel.Current.SelectedCharityId);
-        }
-
         #endregion
-
-        private async void OnDonate(object sender, RoutedEventArgs e)
-        {
-            var charity = DataModel.Current.SelectedCharityId;
-            var giftCard = this.DefaultViewModel["Card"] as GiftCard;
-            
-            var message = await DataModel.Current.DonateAsync(giftCard.Id, charity);
-
-            if (message != null)
-            {
-                var dialog = new Windows.UI.Popups.MessageDialog(message);
-
-                await dialog.ShowAsync();
-
-                this.Frame.GoBack();
-
-                this.Frame.GoBack();
-            }
-        }
     }
 }

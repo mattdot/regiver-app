@@ -59,6 +59,45 @@ namespace Regiver.Data
 
         public string SelectedCharityId { get; set; }
 
+        public async Task<string> DonateAsync(string giftCardId, string charityId)
+        {
+            https://regiver.azure-api.net/v1/accounts/{aid}/donations?subscription-key=<Your subscription key>
+
+            var client = new Windows.Web.Http.HttpClient();
+
+            var uriString = string.Format(
+                "https://regiver.azure-api.net/v1/accounts/{0}/donations?subscription-key={1}",
+                mikesId,
+                subscriptionKey);
+
+            var uri = new Uri(uriString);
+
+            var json = new JsonObject();
+
+            json.Add("card_id", JsonValue.CreateStringValue(giftCardId));
+            json.Add("charity_id", JsonValue.CreateStringValue(charityId));
+
+            var content = json.Stringify();
+
+            var stringContent = new HttpStringContent(content);
+
+            stringContent.Headers.ContentType.MediaType = "application/JSON";
+
+            var message = await client.PostAsync(uri, stringContent);
+
+            var responseString = await message.Content.ReadAsStringAsync();
+
+            System.Diagnostics.Debug.WriteLine(responseString);
+
+            JsonObject card = null;
+
+            if (JsonObject.TryParse(responseString, out card))
+            {
+                return card.GetNamedString("message");
+            }
+
+            return null;
+        }
 
         private void AddDefaultCharities()
         {

@@ -35,9 +35,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="ReGiver" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+        <TextBlock Text="reGiver" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
         <ListView Grid.Row="1" ItemTemplate="{StaticResource CharityItemTemplate}" ItemsSource="{Binding Charities}"
-                  ItemClick="OnCharitySelected" SelectionMode="None" IsItemClickEnabled="True">
+                  ItemClick="OnCharitySelected" SelectionMode="None" IsItemClickEnabled="True" Header="Select a cause">
             
         </ListView>
     </Grid>

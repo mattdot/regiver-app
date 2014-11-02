@@ -26,7 +26,7 @@
 
         <!-- Title Panel -->
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="ReGiver" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock Text="reGiver" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock Text="Donate" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
@@ -67,7 +67,7 @@
                     </StackPanel>
             	</Grid>
             </Button>
-            <Button Content="Donate" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2"/>
+            <Button Content="Donate" Click="OnDonate" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2"/>
         </Grid>
     </Grid>
 </Page>
