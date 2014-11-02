@@ -139,9 +139,9 @@ namespace Regiver
 
                 await dialog.ShowAsync();
 
-                this.Frame.GoBack();
+                DataModel.Current.Cards.Remove(giftCard);
 
-                this.Frame.GoBack();
+                this.Frame.Navigate(typeof(MainPage));
             }
         }
     }

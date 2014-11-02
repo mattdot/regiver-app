@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="Regiver.CardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Regiver"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}">
+
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Card}" RequestedTheme="Dark">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="reGiver" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0" FontFamily="Global User Interface"/>
+            <TextBlock Text="{Binding Name}" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" FontFamily="Global User Interface"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+        	<Grid.RowDefinitions>
+        		<RowDefinition/>
+        		<RowDefinition Height="Auto"/>
+        		<RowDefinition/>
+        		<RowDefinition Height="Auto"/>
+        	</Grid.RowDefinitions>
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition/>
+        		<ColumnDefinition/>
+        	</Grid.ColumnDefinitions>
+        	<Image Grid.ColumnSpan="2" Source="{Binding Image}" Stretch="UniformToFill"/>
+            <TextBlock x:Name="Balance" TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}" Grid.Row="1" Grid.ColumnSpan="2">
+                <Run Text="Balance: $"/>
+                <Run Text="{Binding Balance}"/>
+            </TextBlock>
+        	<TextBlock x:Name="Description" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource BodyTextBlockStyle}"/>
+        	<Button Content="Add to wallet" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Margin="0,0,10,0"/>
+        	<Button Content="Donate" Click="OnDonate" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Grid.Column="1" Margin="10,0,0,0"/>
+
+        </Grid>
+    </Grid>
+</Page>

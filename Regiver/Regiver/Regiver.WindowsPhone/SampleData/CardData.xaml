@@ -1,0 +1,5 @@
+﻿<Data:GiftCard xmlns:Data="using:Regiver.Data" xmlns:System="using:System" CardNumber="Accumsan sed cras curabitur" Description="Integer dis nullam class" Id="Maecenas aenean aliquam praesent" Name="Vestibulum mauris nam" Type="Adipiscing est phasellus curae parturient">
+	<Data:GiftCard.Balance>
+		<System:Decimal/>
+	</Data:GiftCard.Balance>
+</Data:GiftCard>
