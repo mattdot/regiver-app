@@ -1,4 +1,5 @@
 ﻿using Regiver.Common;
+using Regiver.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -67,7 +68,13 @@ namespace Regiver
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            this.DefaultViewModel["CardNumber"] = e.NavigationParameter.ToString();
+            var id = e.NavigationParameter.ToString();
+
+            var card = (from item in DataModel.Current.Cards
+                        where item.Id == id
+                        select item).LastOrDefault();
+
+            this.DefaultViewModel["Card"] = card;
         }
 
         /// <summary>

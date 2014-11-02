@@ -72,7 +72,11 @@ namespace Regiver.Data
 
             var content = json.Stringify();
 
-            var message = await client.PostAsync(uri, new HttpStringContent(content));
+            var stringContent = new HttpStringContent(content);
+
+            stringContent.Headers.ContentType.MediaType = "application/JSON";
+
+            var message = await client.PostAsync(uri, stringContent);
 
             var responseString = await message.Content.ReadAsStringAsync();
 

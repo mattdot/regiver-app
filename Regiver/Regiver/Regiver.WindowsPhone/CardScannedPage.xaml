@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}" d:DataContext="{d:DesignData /SampleData/CardData.xaml}">
 
     <Grid x:Name="LayoutRoot">
 
@@ -22,22 +22,26 @@
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+        <StackPanel Grid.Row="0" Margin="19,0,0,0" RequestedTheme="Dark">
             <TextBlock Text="ReGiver" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock Text="Card found" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+        <Grid DataContext="{Binding Card}" Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
         	<StackPanel VerticalAlignment="Top">
-        		<Image Height="150"/>
-        		<TextBlock x:Name="CardNumber" TextWrapping="Wrap" Text="{Binding CardNumber}" Style="{StaticResource BodyTextBlockStyle}"/>
-        		<TextBlock TextWrapping="Wrap" Text="{Binding Title}"/>
-                <TextBlock TextWrapping="Wrap">
+        		<Image Height="150" Source="{Binding Image}"/>
+        		<TextBlock x:Name="CardNumber" TextWrapping="Wrap" Text="{Binding Id}" Style="{StaticResource BodyTextBlockStyle}"/>
+        		<TextBlock TextWrapping="Wrap" Text="{Binding Name}" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Right">
+                    <Run Text="This Card: $"/>
+                    <Run Text="{Binding Balance}"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Right">
                     <Run Text="Balance: $"/>
                     <Run Text="{Binding Balance}"/>
                 </TextBlock>
-                <Button Content="Done"/>
+                <Button Content="Done" HorizontalAlignment="Center"/>
         	</StackPanel>
 		
         </Grid>

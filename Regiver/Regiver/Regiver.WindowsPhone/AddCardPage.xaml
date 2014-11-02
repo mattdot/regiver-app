@@ -27,6 +27,30 @@
 	</Page.BottomAppBar>
 
     <Grid x:Name="LayoutRoot">
+    	<VisualStateManager.VisualStateGroups>
+    		<VisualStateGroup x:Name="VisualStateGroup">
+    			<VisualStateGroup.Transitions>
+    				<VisualTransition GeneratedDuration="0:0:0.5"/>
+    			</VisualStateGroup.Transitions>
+    			<VisualState x:Name="FoundCardNumber">
+    				<Storyboard>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.FontFamily)" Storyboard.TargetName="CardNumber">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<FontFamily>Global User Interface</FontFamily>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    				</Storyboard>
+    			</VisualState>
+    			<VisualState x:Name="Scanning">
+    				<Storyboard>
+    					<DoubleAnimation Duration="0" To="180" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="CardNumber" d:IsOptimized="True"/>
+    					<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border" d:IsOptimized="True"/>
+    				</Storyboard>
+    			</VisualState>
+    		</VisualStateGroup>
+    	</VisualStateManager.VisualStateGroups>
 
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -61,8 +85,14 @@
         			<Rectangle x:Name="CaptureFrame" HorizontalAlignment="Center" Height="60" Stroke="Red" VerticalAlignment="Center" Width="500" StrokeThickness="2"/>
         		</Grid>
         	</Viewbox>
-        	<TextBox x:Name="CardNumber" Margin="0" TextWrapping="Wrap" Grid.Row="1" Visibility="Collapsed"/>
-        	<ProgressBar x:Name="ProgressBar" VerticalAlignment="Center" Grid.ColumnSpan="2" Visibility="Collapsed" Maximum="5"/>
+        	<ProgressBar x:Name="ProgressBar" VerticalAlignment="Top" Grid.ColumnSpan="2" Visibility="Collapsed" Maximum="5" IsHitTestVisible="False"/>
+        	<Border x:Name="border" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#E5008000" Padding="5" IsHitTestVisible="False">
+        		<TextBlock x:Name="CardNumber" TextWrapping="NoWrap" Text="Card Number" Style="{StaticResource SubheaderTextBlockStyle}">
+        			<TextBlock.Projection>
+        				<PlaneProjection/>
+        			</TextBlock.Projection>
+        		</TextBlock>
+        	</Border>
         </Grid>
     </Grid>
 </Page>
