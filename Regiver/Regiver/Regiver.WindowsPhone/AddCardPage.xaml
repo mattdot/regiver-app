@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="Regiver.AddCardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Regiver"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Page.Resources>
+		<Style x:Key="NumberGroupStyle" TargetType="Rectangle">
+			<Setter Property="Fill" Value="#B768FF00"/>
+			<Setter Property="Visibility" Value="Collapsed"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+		</Style>
+		<Style x:Key="GroupBorderStyle" TargetType="Border">
+			<Setter Property="Background" Value="#7F2EFF00"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+		</Style>
+	</Page.Resources>
+	<Page.BottomAppBar>
+		<CommandBar>
+			<AppBarButton x:Name="AcceptButton" Icon="Accept" Label="Accept" Visibility="Collapsed"/>
+		</CommandBar>
+	</Page.BottomAppBar>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="ReGiver" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock Text="Scan a card" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+        	<Grid.RowDefinitions>
+        		<RowDefinition/>
+        		<RowDefinition Height="Auto"/>
+        	</Grid.RowDefinitions>
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition/>
+        		<ColumnDefinition Width="Auto"/>
+        	</Grid.ColumnDefinitions>
+        	<Viewbox Margin="0,0,0.333,-1" Tapped="OnTappedViewbox">
+        		<Grid Height="450" Width="800">
+        			<CaptureElement x:Name="Preview" Margin="0,0,0,1"/>
+        			<Rectangle x:Name="CaptureFrame" HorizontalAlignment="Center" Height="60" Stroke="Red" VerticalAlignment="Center" Width="500" StrokeThickness="2"/>
+        		</Grid>
+        	</Viewbox>
+        	<TextBox x:Name="CardNumber" Margin="0" TextWrapping="Wrap" Grid.Row="1" Visibility="Collapsed"/>
+        	<ProgressBar x:Name="ProgressBar" VerticalAlignment="Center" Grid.ColumnSpan="2" Visibility="Collapsed" Maximum="5"/>
+        </Grid>
+    </Grid>
+</Page>
