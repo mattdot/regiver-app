@@ -97,10 +97,16 @@
     <Compile Include="CardScannedPage.xaml.cs">
       <DependentUpon>CardScannedPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CharityListPage.xaml.cs">
+      <DependentUpon>CharityListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="DonatePage.xaml.cs">
+      <DependentUpon>DonatePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -130,6 +136,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="CardScannedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CharityListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DonatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

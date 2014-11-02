@@ -31,17 +31,17 @@
         <Grid DataContext="{Binding Card}" Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
         	<StackPanel VerticalAlignment="Top">
         		<Image Height="150" Source="{Binding Image}"/>
-        		<TextBlock x:Name="CardNumber" TextWrapping="Wrap" Text="{Binding Id}" Style="{StaticResource BodyTextBlockStyle}"/>
-        		<TextBlock TextWrapping="Wrap" Text="{Binding Name}" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                <TextBlock TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Right">
+        		<TextBlock x:Name="CardNumber" TextWrapping="Wrap" Text="{Binding Id}" Style="{StaticResource BodyTextBlockStyle}" Foreground="White"/>
+        		<TextBlock TextWrapping="Wrap" Text="{Binding Name}" Style="{StaticResource SubheaderTextBlockStyle}" Foreground="White"/>
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Right" Foreground="White">
                     <Run Text="This Card: $"/>
                     <Run Text="{Binding Balance}"/>
                 </TextBlock>
-                <TextBlock TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Right">
+                <TextBlock TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Right" Foreground="White">
                     <Run Text="Balance: $"/>
                     <Run Text="{Binding Balance}"/>
                 </TextBlock>
-                <Button Content="Done" HorizontalAlignment="Center"/>
+                <Button Content="OK" Click="OnOk" HorizontalAlignment="Center" Margin="0,40,0,0"/>
         	</StackPanel>
 		
         </Grid>

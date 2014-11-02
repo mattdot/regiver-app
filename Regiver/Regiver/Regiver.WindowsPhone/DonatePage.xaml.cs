@@ -24,12 +24,12 @@ namespace Regiver
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CardScannedPage : Page
+    public sealed partial class DonatePage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public CardScannedPage()
+        public DonatePage()
         {
             this.InitializeComponent();
 
@@ -75,6 +75,11 @@ namespace Regiver
                         select item).LastOrDefault();
 
             this.DefaultViewModel["Card"] = card;
+            this.DefaultViewModel["Charity"] = (from item in DataModel.Current.Charities
+                                                where item.Id == DataModel.Current.SelectedCharityId
+                                                select item).FirstOrDefault();
+
+            this.DataContext = this.DefaultViewModel;
         }
 
         /// <summary>
@@ -114,13 +119,11 @@ namespace Regiver
             this.navigationHelper.OnNavigatedFrom(e);
         }
 
-        #endregion
-
-        private void OnOk(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            var card = this.DefaultViewModel["Card"] as GiftCard;
-
-            this.Frame.Navigate(typeof(CardPage), card.Id);
+            this.Frame.Navigate(typeof(CharityListPage), DataModel.Current.SelectedCharityId);
         }
+
+        #endregion
     }
 }

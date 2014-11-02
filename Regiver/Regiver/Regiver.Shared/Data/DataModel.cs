@@ -23,6 +23,8 @@ namespace Regiver.Data
         public DataModel()
         {
             this.Cards = new ObservableCollection<GiftCard>();
+            
+            this.Charities = new ObservableCollection<Charity>();
 
             if (DesignMode.DesignModeEnabled)
             {
@@ -46,12 +48,49 @@ namespace Regiver.Data
                     Balance = 15.4m,
                     Id = Guid.NewGuid().ToString()
                 });
+
+                AddDefaultCharities();
             }
             else
             {
                 this.GetData();
             }
         }
+
+        public string SelectedCharityId { get; set; }
+
+
+        private void AddDefaultCharities()
+        {
+            this.Charities.Add(new Charity
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Boys and Girls Club of America",
+                Logo = new BitmapImage(new Uri("http://www.chrisdraftfamilyfoundation.org/tools/partners/files/0027.jpg"))
+            });
+            this.Charities.Add(new Charity
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Wounded Warrior Project",
+                Logo = new BitmapImage(new Uri("http://vogeltalksrving.com/wp-content/uploads/2011/09/Wounded_Warrior_Project_25.jpg"))
+            });
+
+            this.Charities.Add(new Charity
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Bill and Melinda Gates Foundation",
+                Logo = new BitmapImage(new Uri("http://blogs-images.forbes.com/mfonobongnsehe/files/2012/07/Bill-and-Melinda-Gates-Foundation1.png"))
+            });
+
+            this.Charities.Add(new Charity
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "The Human Fund",
+                Logo = new BitmapImage(new Uri("http://reganwolfrom.files.wordpress.com/2009/12/seinfeld_human_fund_blue_shirt.jpg"))
+            });
+        }
+
+        public ObservableCollection<Charity> Charities { get; private set; }
 
         public async Task<GiftCard> AddCardAsync(string cardNumber)
         {
@@ -107,18 +146,66 @@ namespace Regiver.Data
 
         private async void GetData()
         {
-            var client = new Windows.Web.Http.HttpClient();
-
-            var uriString = string.Format(
-                CultureInfo.InvariantCulture,
-                "https://regiver.azure-api.net/v1/accounts/{0}?subscription-key={1}",
-                mikesId,
-                subscriptionKey);
-
-            var uri = new Uri(uriString);
-
             try
             {
+                await GetCardsAsync();
+
+                await GetCharitiesAsync();
+            }
+            catch (System.Exception se)
+            {
+                System.Diagnostics.Debug.WriteLine(se.Message);
+            }
+        }
+
+        private async Task GetCharitiesAsync()
+        {
+            using (var client = new Windows.Web.Http.HttpClient())
+            {
+                var uriString = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "https://regiver.azure-api.net/v1/charities?subscription-key={0}",
+                    subscriptionKey);
+
+                var uri = new Uri(uriString);
+                var json = await client.GetStringAsync(uri);
+
+                System.Diagnostics.Debug.WriteLine(json);
+
+                JsonObject charities = null;
+
+                if (Windows.Data.Json.JsonObject.TryParse(json, out charities))
+                {
+                    var items = from item in charities.GetNamedArray("charities")
+                                let charity = item.GetObject()
+                                let logo_path = charity.GetNamedString("logo_path")
+                                select new Charity
+                                {
+                                    Id = charity.GetNamedString("organization_uuid"),
+                                    Name = charity.GetNamedString("organization_name"),
+                                    Logo = new BitmapImage(new Uri(logo_path))
+                                };
+
+                    foreach (var item in items)
+                    {
+                        this.Charities.Add(item);
+                    }
+
+                }
+            }
+        }
+
+        private async Task GetCardsAsync()
+        {
+            using (var client = new Windows.Web.Http.HttpClient())
+            {
+                var uriString = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "https://regiver.azure-api.net/v1/accounts/{0}?subscription-key={1}",
+                    mikesId,
+                    subscriptionKey);
+
+                var uri = new Uri(uriString);
                 var json = await client.GetStringAsync(uri);
 
                 System.Diagnostics.Debug.WriteLine(json);
@@ -143,12 +230,7 @@ namespace Regiver.Data
                     {
                         this.Cards.Add(card);
                     }
-
                 }
-            }
-            catch (System.Exception se)
-            {
-                System.Diagnostics.Debug.WriteLine(se.Message);
             }
         }
 

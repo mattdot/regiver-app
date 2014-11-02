@@ -24,12 +24,12 @@ namespace Regiver
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CardScannedPage : Page
+    public sealed partial class CharityListPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public CardScannedPage()
+        public CharityListPage()
         {
             this.InitializeComponent();
 
@@ -68,13 +68,15 @@ namespace Regiver
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var id = e.NavigationParameter.ToString();
+            var selectedCharity = e.NavigationParameter as string;
 
-            var card = (from item in DataModel.Current.Cards
-                        where item.Id == id
-                        select item).LastOrDefault();
+            this.DataContext = this.DefaultViewModel;
 
-            this.DefaultViewModel["Card"] = card;
+            this.DefaultViewModel["Charities"] = DataModel.Current.Charities;
+
+            this.DefaultViewModel["SelectedCharity"] = (from item in DataModel.Current.Charities
+                                                        where item.Id == selectedCharity
+                                                        select item).FirstOrDefault();
         }
 
         /// <summary>
@@ -116,11 +118,13 @@ namespace Regiver
 
         #endregion
 
-        private void OnOk(object sender, RoutedEventArgs e)
+        private void OnCharitySelected(object sender, ItemClickEventArgs e)
         {
-            var card = this.DefaultViewModel["Card"] as GiftCard;
+            var item = e.ClickedItem as Charity;
 
-            this.Frame.Navigate(typeof(CardPage), card.Id);
+            DataModel.Current.SelectedCharityId = item.Id;
+
+            this.Frame.GoBack();
         }
     }
 }
