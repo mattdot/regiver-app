@@ -61,8 +61,6 @@ namespace Regiver.Data
 
         public async Task<string> DonateAsync(string giftCardId, string charityId)
         {
-            https://regiver.azure-api.net/v1/accounts/{aid}/donations?subscription-key=<Your subscription key>
-
             var client = new Windows.Web.Http.HttpClient();
 
             var uriString = string.Format(
