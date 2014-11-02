@@ -16,7 +16,7 @@ namespace Regiver.Data
     public class DataModel
     {
         private const string subscriptionKey = "2398b934ec9e40d09afecfdce2692a36";
-        private const string mikesId = "123";
+        private const string mikesId = "45415083d32d4901a41bab9120737269";
 
         private static DataModel current;
 
@@ -183,7 +183,10 @@ namespace Regiver.Data
                                 {
                                     Id = charity.GetNamedString("organization_uuid"),
                                     Name = charity.GetNamedString("organization_name"),
-                                    Logo = new BitmapImage(new Uri(logo_path))
+                                    Logo = new BitmapImage(new Uri(logo_path)),
+                                    Location = string.Format("{0}, {1}",
+                                                charity.GetNamedString("city"),
+                                                charity.GetNamedString("region"))
                                 };
 
                     foreach (var item in items)

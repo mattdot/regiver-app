@@ -45,14 +45,14 @@
         		<ColumnDefinition/>
         		<ColumnDefinition Width="Auto"/>
         	</Grid.ColumnDefinitions>
-        	<TextBlock x:Name="CardName" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}"/>
+        	<TextBlock x:Name="CardName" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Style="{StaticResource SubheaderTextBlockStyle}" Margin="0,0,0,5"/>
         	<Image Grid.RowSpan="2" Source="{Binding Image}" Height="100" Grid.Row="1" HorizontalAlignment="Left"/>
-        	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Text="Card Value" Style="{StaticResource SubheaderTextBlockStyle}" Margin="5" Grid.Row="1"/>
-            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" Style="{StaticResource BodyTextBlockStyle}" Margin="5,5,5,0" FontFamily="Global User Interface">
+        	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Text="Card Value" Style="{StaticResource TitleTextBlockStyle}" Margin="5" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" Style="{StaticResource SubheaderTextBlockStyle}" Margin="5,5,5,0" FontFamily="Global User Interface">
                 <Run Text="$"/>
                 <Run Text="{Binding Balance}"/>
             </TextBlock>
-            <TextBlock x:Name="Matching" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Your employer will match this amount!" VerticalAlignment="Top" Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource BodyTextBlockStyle}" Margin="0,10,5,10" Foreground="#FF91FF91" FontFamily="Global User Interface"/>
+            <TextBlock x:Name="Matching" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Your employer will match this amount!" VerticalAlignment="Top" Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource BodyTextBlockStyle}" Margin="0,20,5,20" Foreground="#FF91FF91" FontFamily="Global User Interface"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Select a Cause" VerticalAlignment="Top" Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource BodyTextBlockStyle}"/>
             <Button HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="5" Grid.ColumnSpan="2" Click="Button_Click">
             	<Grid Margin="5" DataContext="{Binding DefaultViewModel.Charity, ElementName=page}">
@@ -61,7 +61,10 @@
             			<ColumnDefinition/>
             		</Grid.ColumnDefinitions>
             		<Image Height="100" Width="100" Source="{Binding Logo}"/>
-            		<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource TitleTextBlockStyle}"/>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0" >
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{Binding Location}" Style="{StaticResource BodyTextBlockStyle}"/>
+                    </StackPanel>
             	</Grid>
             </Button>
             <Button Content="Donate" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="6" Grid.ColumnSpan="2"/>

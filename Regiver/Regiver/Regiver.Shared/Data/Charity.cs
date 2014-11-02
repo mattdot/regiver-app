@@ -11,5 +11,7 @@ namespace Regiver.Data
         public string Name { get; set; }
 
         public ImageSource Logo { get; set; }
+
+        public string Location { get; set; }
     }
 }

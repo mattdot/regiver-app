@@ -15,7 +15,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="{Binding Logo}" Stretch="UniformToFill"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource TitleTextBlockStyle}"/>
+                <StackPanel Grid.Column="1" Margin="10,0,0,0" >
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Location}" Style="{StaticResource BodyTextBlockStyle}"/>
+                </StackPanel>
             </Grid>
         </DataTemplate>
     </Page.Resources>
