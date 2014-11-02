@@ -57,5 +57,10 @@ namespace Regiver
         {
             this.Frame.Navigate(typeof(AddCardPage));
         }
+
+        private void ProfileButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+			this.Frame.Navigate(typeof(ProfilePage));
+        }
     }
 }
