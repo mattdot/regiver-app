@@ -90,6 +90,11 @@
         			</TextBlock.Projection>
         		</TextBlock>
         	</Border>
+        	<Image x:Name="CapturedImage" HorizontalAlignment="Center" Height="60" VerticalAlignment="Bottom" Width="500" RenderTransformOrigin="0.5,0.5">
+        		<Image.RenderTransform>
+        			<CompositeTransform/>
+        		</Image.RenderTransform>
+        	</Image>
         </Grid>
     </Grid>
 </Page>
